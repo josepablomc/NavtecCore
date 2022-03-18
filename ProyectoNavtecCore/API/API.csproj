@@ -20,5 +20,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DataModels\" />
+    <Folder Include="Mapping\" />
+  </ItemGroup>
+
 
 </Project>
