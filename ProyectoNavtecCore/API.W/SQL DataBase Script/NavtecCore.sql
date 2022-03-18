@@ -1,0 +1,154 @@
+-- =============================================
+-- Autor:			Jose Pablo Montoya & Karen Delgado Navarro
+-- Fecha Creación:	17/03/2022
+-- Descripción:		Proyecto Navtec Core
+-- =============================================
+
+USE [NavtecCore]
+GO
+--Empresas*		-	Clientes*
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Empresas](
+	[idEmpresa] [int] IDENTITY(1,1) NOT NULL,
+	[idCliente] [int] NOT NULL,
+	[nombreEmpresa] [nvarchar](255) NOT NULL,
+	[telefonoEmpresa] [nvarchar](255) NOT NULL,
+	[cedulaJuridica] [nvarchar](255) NOT NULL
+PRIMARY KEY CLUSTERED
+(
+	[idEmpresa] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Clientes](
+	[idCliente] [int] IDENTITY(1,1) NOT NULL,
+	[nombreCliente] [nvarchar](255) NOT NULL,
+	[correoCliente] [nvarchar](255) NOT NULL,
+	[telefonoCliente] [nvarchar](255) NOT NULL
+PRIMARY KEY CLUSTERED
+(
+	[idCliente] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+--Usuarios*		-	Roles*
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Usuarios](
+	[idUsuario] [int] IDENTITY(1,1) NOT NULL,
+	[idRol] [int] NOT NULL,
+	[nombreCompleto] [nvarchar](255) NOT NULL,
+	[correoUsuario] [nvarchar](255) NOT NULL,
+	[claveUsuario] [nvarchar](255) NOT NULL
+PRIMARY KEY CLUSTERED 
+(
+	[idUsuario] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Roles](
+	[idRol] [int] IDENTITY(1,1) NOT NULL,
+	[rol] [nvarchar](255) NOT NULL
+PRIMARY KEY CLUSTERED 
+(
+	[idRol] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+--Cotizaciones*	-	Servicios*
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Cotizaciones](
+	[idCotizacion] [int] IDENTITY(1,1) NOT NULL,
+	[idServicio] [int] NOT NULL,
+	[fechaCotizacion] [date] NOT NULL,
+	[nombreCliente] [nvarchar](255) NOT NULL,
+	[precioCotizacion] [decimal](18, 0) NOT NULL  --TOMAR EN CUENTA QUE ES DECIMAL
+PRIMARY KEY CLUSTERED
+(
+	[idCotizacion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Servicios](
+	[idServicio] [int] IDENTITY(1,1) NOT NULL,
+	[descripcionServicio] [nvarchar](255) NOT NULL
+PRIMARY KEY CLUSTERED 
+(
+	[idServicio] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+--Gastos*
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Gastos](
+	[idGasto] [int] IDENTITY(1,1) NOT NULL,
+	[descripcionGasto] [nvarchar](255) NOT NULL,
+	[fechaGasto] [date] NOT NULL,
+	[montoGasto] [decimal](18, 0) NOT NULL,  --TOMAR EN CUENTA QUE ES DECIMAL
+PRIMARY KEY CLUSTERED 
+(
+	[idGasto] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+--Proveedores*
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Proveedores](
+	[idProveedor] [int] IDENTITY(1,1) NOT NULL,
+	[nombreProveedor] [nvarchar](255) NOT NULL,
+	[telefonoProveedor] [nvarchar](255) NOT NULL,
+	[descripcionProveedor] [nvarchar](255) NOT NULL
+PRIMARY KEY CLUSTERED 
+(
+	[idProveedor] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE Empresas
+ADD CONSTRAINT FK_Empresa_Cliente
+FOREIGN KEY (idCliente) REFERENCES Clientes(idCliente);
+GO
+
+ALTER TABLE Usuarios
+ADD CONSTRAINT FK_Usuario_Rol
+FOREIGN KEY (idRol) REFERENCES Roles(idRol);
+GO
+
+ALTER TABLE Cotizaciones
+ADD CONSTRAINT FK_Cotizacion_Servicio
+FOREIGN KEY (idServicio) REFERENCES Servicios(idServicio);
+GO
