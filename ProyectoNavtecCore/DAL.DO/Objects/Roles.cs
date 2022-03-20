@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace API.W.Models
+namespace DAL.DO.Objects
 {
     public partial class Roles
     {
@@ -18,6 +19,7 @@ namespace API.W.Models
         public string Rol { get; set; }
 
         public virtual ICollection<Usuarios> Usuarios { get; set; }
-        
+
+
     }
 }
