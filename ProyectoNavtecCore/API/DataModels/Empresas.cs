@@ -5,7 +5,7 @@ using System.Collections.Generic;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace API.W.Models
+namespace API.DataModels
 {
     public partial class Empresas
     {
@@ -16,6 +16,5 @@ namespace API.W.Models
         public string CedulaJuridica { get; set; }
 
         public virtual Clientes IdClienteNavigation { get; set; }
-        public virtual Clientes Clientes { get; set; } //Ojo con el Alias
     }
 }

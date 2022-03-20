@@ -24,7 +24,7 @@ namespace API.W.Models
         public virtual DbSet<Empresas> Empresas { get; set; }
         public virtual DbSet<Gastos> Gastos { get; set; }
         public virtual DbSet<Proveedores> Proveedores { get; set; }
-        public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<Roles> Roles { get; set; } //Le puse el using de DA.DO.Objects, pero no estoy segura si está bien --Karen 19/03/2022
         public virtual DbSet<Servicios> Servicios { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
 
@@ -32,8 +32,8 @@ namespace API.W.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-OK2CS3P\\SQLEXPRESS;Database=NavtecCore;Trusted_Connection=True;");
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Server=localhost;Database=NavtecCore;Trusted_Connection=True;");
             }
         }
 
@@ -42,7 +42,7 @@ namespace API.W.Models
             modelBuilder.Entity<Clientes>(entity =>
             {
                 entity.HasKey(e => e.IdCliente)
-                    .HasName("PK__Clientes__885457EEB233F8A2");
+                    .HasName("PK__Clientes__885457EEDC8D8629");
 
                 entity.Property(e => e.IdCliente).HasColumnName("idCliente");
 
@@ -65,7 +65,7 @@ namespace API.W.Models
             modelBuilder.Entity<Cotizaciones>(entity =>
             {
                 entity.HasKey(e => e.IdCotizacion)
-                    .HasName("PK__Cotizaci__D931C39BBE52FD36");
+                    .HasName("PK__Cotizaci__D931C39B89B8DD60");
 
                 entity.Property(e => e.IdCotizacion).HasColumnName("idCotizacion");
 
@@ -94,7 +94,7 @@ namespace API.W.Models
             modelBuilder.Entity<Empresas>(entity =>
             {
                 entity.HasKey(e => e.IdEmpresa)
-                    .HasName("PK__Empresas__75D2CED42283993E");
+                    .HasName("PK__Empresas__75D2CED444007347");
 
                 entity.Property(e => e.IdEmpresa).HasColumnName("idEmpresa");
 
@@ -115,7 +115,7 @@ namespace API.W.Models
                     .HasColumnName("telefonoEmpresa")
                     .HasMaxLength(255);
 
-                entity.HasOne(d => d.IdClienteNavigation)
+                entity.HasOne(d => d.Clientes) //Tabla del Foreign Key (Ojo este alias se lee de API.W Models)
                     .WithMany(p => p.Empresas)
                     .HasForeignKey(d => d.IdCliente)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -125,7 +125,7 @@ namespace API.W.Models
             modelBuilder.Entity<Gastos>(entity =>
             {
                 entity.HasKey(e => e.IdGasto)
-                    .HasName("PK__Gastos__F25CC3216A42A5A9");
+                    .HasName("PK__Gastos__F25CC3211C99B399");
 
                 entity.Property(e => e.IdGasto).HasColumnName("idGasto");
 
@@ -146,7 +146,7 @@ namespace API.W.Models
             modelBuilder.Entity<Proveedores>(entity =>
             {
                 entity.HasKey(e => e.IdProveedor)
-                    .HasName("PK__Proveedo__A3FA8E6BD8337B94");
+                    .HasName("PK__Proveedo__A3FA8E6BB819187A");  
 
                 entity.Property(e => e.IdProveedor).HasColumnName("idProveedor");
 
@@ -169,7 +169,7 @@ namespace API.W.Models
             modelBuilder.Entity<Roles>(entity =>
             {
                 entity.HasKey(e => e.IdRol)
-                    .HasName("PK__Roles__3C872F76C5443948");
+                    .HasName("PK__Roles__3C872F762314100D");
 
                 entity.Property(e => e.IdRol).HasColumnName("idRol");
 
@@ -182,7 +182,7 @@ namespace API.W.Models
             modelBuilder.Entity<Servicios>(entity =>
             {
                 entity.HasKey(e => e.IdServicio)
-                    .HasName("PK__Servicio__CEB98119E9387452");
+                    .HasName("PK__Servicio__CEB98119A3D8A7BE");
 
                 entity.Property(e => e.IdServicio).HasColumnName("idServicio");
 
@@ -195,7 +195,7 @@ namespace API.W.Models
             modelBuilder.Entity<Usuarios>(entity =>
             {
                 entity.HasKey(e => e.IdUsuario)
-                    .HasName("PK__Usuarios__645723A643315996");
+                    .HasName("PK__Usuarios__645723A616FBD182");
 
                 entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
 
@@ -216,7 +216,7 @@ namespace API.W.Models
                     .HasColumnName("nombreCompleto")
                     .HasMaxLength(255);
 
-                entity.HasOne(d => d.IdRolNavigation)
+                entity.HasOne(d => d.Roles) //Tabla del Foreign Key (Ojo este alias se lee de API.W Models)
                     .WithMany(p => p.Usuarios)
                     .HasForeignKey(d => d.IdRol)
                     .OnDelete(DeleteBehavior.ClientSetNull)
