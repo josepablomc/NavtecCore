@@ -9,7 +9,6 @@ using data = DAL.DO.Objects;
 
 namespace DAL
 {
-    //Use this one when no relationship required!!!!!!!!!!!!!!!!!!!!!!!!!!! Se usa xq para insertar un nuevo Cliente en la DB no requiere el ingreso de una Empresa
 
     public class Clientes : ICRUD<data.Clientes>
     {
@@ -37,7 +36,7 @@ namespace DAL
 
         public data.Clientes GetOneById(int id)
         {
-            return repo.GetOnebyID(id);//Consulta al profe (Tuve que hacer ToString
+            return repo.GetOnebyID(id);
         }
 
         public Task<data.Clientes> GetOneByIdAsync(int id)
