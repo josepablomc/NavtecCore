@@ -9,6 +9,6 @@ namespace DAL.Repository
     public interface IRepositoryEmpresas : IRepository<data.Empresas>
     {
         Task<IEnumerable<data.Empresas>> GetAllAsync();
-        Task<data.Empresas> GetOneByIdAsync(int Id);//Signature
+        Task<data.Empresas> GetOneByIdAsync(int Id);
     }
 }

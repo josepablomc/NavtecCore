@@ -2,18 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
-// If you have enabled NRTs for your project, then un-comment the following line:
-// #nullable disable
+
 
 namespace DAL.DO.Objects
 {
     public partial class Empresas
     {
-        //public Empresas()
-        //{
-        //    Clientes = new HashSet<Clientes>();
-        //}
 
         public int IdEmpresa { get; set; }
         [Key] //To define this is a Foreingnkey 
