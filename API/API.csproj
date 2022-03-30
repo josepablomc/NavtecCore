@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataModels\" />
     <Folder Include="Mapping\" />
     <ProjectReference Include="..\BE\BE.csproj" />
     <ProjectReference Include="..\DAL.DO\DAL.DO.csproj" />
