@@ -21,10 +21,10 @@ namespace DAL.EF
         public virtual DbSet<Empresas> Empresas { get; set; }
         public virtual DbSet<Roles> Roles { get; set; } 
         public virtual DbSet<Usuarios> Usuarios { get; set; }
-        //public virtual DbSet<Cotizaciones> Cotizaciones { get; set; }
-        //public virtual DbSet<Gastos> Gastos { get; set; }
-        //public virtual DbSet<Proveedores> Proveedores { get; set; }
-        //public virtual DbSet<Servicios> Servicios { get; set; }
+        public virtual DbSet<Cotizaciones> Cotizaciones { get; set; }
+        public virtual DbSet<Gastos> Gastos { get; set; }
+        public virtual DbSet<Proveedores> Proveedores { get; set; }
+        public virtual DbSet<Servicios> Servicios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -60,34 +60,34 @@ namespace DAL.EF
                     .HasMaxLength(255);
             });
 
-            //modelBuilder.Entity<Cotizaciones>(entity =>
-            //{
-            //    entity.HasKey(e => e.IdCotizacion)
-            //        .HasName("PK__Cotizaci__D931C39B89B8DD60");
+            modelBuilder.Entity<Cotizaciones>(entity =>
+            {
+                entity.HasKey(e => e.IdCotizacion)
+                    .HasName("PK__Cotizaci__D931C39B89B8DD60");
 
-            //    entity.Property(e => e.IdCotizacion).HasColumnName("idCotizacion");
+                entity.Property(e => e.IdCotizacion).HasColumnName("idCotizacion");
 
-            //    entity.Property(e => e.FechaCotizacion)
-            //        .HasColumnName("fechaCotizacion")
-            //        .HasColumnType("date");
+                entity.Property(e => e.FechaCotizacion)
+                    .HasColumnName("fechaCotizacion")
+                    .HasColumnType("date");
 
-            //    entity.Property(e => e.IdServicio).HasColumnName("idServicio");
+                entity.Property(e => e.IdServicio).HasColumnName("idServicio");
 
-            //    entity.Property(e => e.NombreCliente)
-            //        .IsRequired()
-            //        .HasColumnName("nombreCliente")
-            //        .HasMaxLength(255);
+                entity.Property(e => e.NombreCliente)
+                    .IsRequired()
+                    .HasColumnName("nombreCliente")
+                    .HasMaxLength(255);
 
-            //    entity.Property(e => e.PrecioCotizacion)
-            //        .HasColumnName("precioCotizacion")
-            //        .HasColumnType("decimal(18, 0)");
+                entity.Property(e => e.PrecioCotizacion)
+                    .HasColumnName("precioCotizacion")
+                    .HasColumnType("decimal(18, 0)");
 
-            //    entity.HasOne(d => d.IdServicioNavigation)
-            //        .WithMany(p => p.Cotizaciones)
-            //        .HasForeignKey(d => d.IdServicio)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK_Cotizacion_Servicio");
-            //});
+                entity.HasOne(d => d.IdServicioNavigation)
+                    .WithMany(p => p.Cotizaciones)
+                    .HasForeignKey(d => d.IdServicio)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Cotizacion_Servicio");
+            });
 
             modelBuilder.Entity<Empresas>(entity =>
             {
@@ -120,49 +120,49 @@ namespace DAL.EF
                     .HasConstraintName("FK_Empresa_Cliente");
             });
 
-            //modelBuilder.Entity<Gastos>(entity =>
-            //{
-            //    entity.HasKey(e => e.IdGasto)
-            //        .HasName("PK__Gastos__F25CC3211C99B399");
+            modelBuilder.Entity<Gastos>(entity =>
+            {
+                entity.HasKey(e => e.IdGasto)
+                    .HasName("PK__Gastos__F25CC3211C99B399");
 
-            //    entity.Property(e => e.IdGasto).HasColumnName("idGasto");
+                entity.Property(e => e.IdGasto).HasColumnName("idGasto");
 
-            //    entity.Property(e => e.DescripcionGasto)
-            //        .IsRequired()
-            //        .HasColumnName("descripcionGasto")
-            //        .HasMaxLength(255);
+                entity.Property(e => e.DescripcionGasto)
+                    .IsRequired()
+                    .HasColumnName("descripcionGasto")
+                    .HasMaxLength(255);
 
-            //    entity.Property(e => e.FechaGasto)
-            //        .HasColumnName("fechaGasto")
-            //        .HasColumnType("date");
+                entity.Property(e => e.FechaGasto)
+                    .HasColumnName("fechaGasto")
+                    .HasColumnType("date");
 
-            //    entity.Property(e => e.MontoGasto)
-            //        .HasColumnName("montoGasto")
-            //        .HasColumnType("decimal(18, 0)");
-            //});
+                entity.Property(e => e.MontoGasto)
+                    .HasColumnName("montoGasto")
+                    .HasColumnType("decimal(18, 0)");
+            });
 
-            //modelBuilder.Entity<Proveedores>(entity =>
-            //{
-            //    entity.HasKey(e => e.IdProveedor)
-            //        .HasName("PK__Proveedo__A3FA8E6BB819187A");
+            modelBuilder.Entity<Proveedores>(entity =>
+            {
+                entity.HasKey(e => e.IdProveedor)
+                    .HasName("PK__Proveedo__A3FA8E6BB819187A");
 
-            //    entity.Property(e => e.IdProveedor).HasColumnName("idProveedor");
+                entity.Property(e => e.IdProveedor).HasColumnName("idProveedor");
 
-            //    entity.Property(e => e.DescripcionProveedor)
-            //        .IsRequired()
-            //        .HasColumnName("descripcionProveedor")
-            //        .HasMaxLength(255);
+                entity.Property(e => e.DescripcionProveedor)
+                    .IsRequired()
+                    .HasColumnName("descripcionProveedor")
+                    .HasMaxLength(255);
 
-            //    entity.Property(e => e.NombreProveedor)
-            //        .IsRequired()
-            //        .HasColumnName("nombreProveedor")
-            //        .HasMaxLength(255);
+                entity.Property(e => e.NombreProveedor)
+                    .IsRequired()
+                    .HasColumnName("nombreProveedor")
+                    .HasMaxLength(255);
 
-            //    entity.Property(e => e.TelefonoProveedor)
-            //        .IsRequired()
-            //        .HasColumnName("telefonoProveedor")
-            //        .HasMaxLength(255);
-            //});
+                entity.Property(e => e.TelefonoProveedor)
+                    .IsRequired()
+                    .HasColumnName("telefonoProveedor")
+                    .HasMaxLength(255);
+            });
 
             modelBuilder.Entity<Roles>(entity =>
             {
@@ -177,18 +177,18 @@ namespace DAL.EF
                     .HasMaxLength(255);
             });
 
-            //modelBuilder.Entity<Servicios>(entity =>
-            //{
-            //    entity.HasKey(e => e.IdServicio)
-            //        .HasName("PK__Servicio__CEB98119A3D8A7BE");
+            modelBuilder.Entity<Servicios>(entity =>
+            {
+                entity.HasKey(e => e.IdServicio)
+                    .HasName("PK__Servicio__CEB98119A3D8A7BE");
 
-            //    entity.Property(e => e.IdServicio).HasColumnName("idServicio");
+                entity.Property(e => e.IdServicio).HasColumnName("idServicio");
 
-            //    entity.Property(e => e.DescripcionServicio)
-            //        .IsRequired()
-            //        .HasColumnName("descripcionServicio")
-            //        .HasMaxLength(255);
-            //});
+                entity.Property(e => e.DescripcionServicio)
+                    .IsRequired()
+                    .HasColumnName("descripcionServicio")
+                    .HasMaxLength(255);
+            });
 
             modelBuilder.Entity<Usuarios>(entity =>
             {
