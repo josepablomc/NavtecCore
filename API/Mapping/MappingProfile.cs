@@ -16,6 +16,10 @@ namespace API.Mapping
             CreateMap<data.Roles, DataModels.Roles>().ReverseMap();
             CreateMap<data.Empresas, DataModels.Empresas>().ReverseMap();
             CreateMap<data.Clientes, DataModels.Clientes>().ReverseMap();
+            CreateMap<data.Servicios, DataModels.Servicios>().ReverseMap();
+            CreateMap<data.Cotizaciones, DataModels.Cotizaciones>().ReverseMap();
+            CreateMap<data.Gastos, DataModels.Gastos>().ReverseMap();
+            CreateMap<data.Proveedores, DataModels.Proveedores>().ReverseMap();
 
         }
     }
