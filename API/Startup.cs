@@ -18,7 +18,6 @@ namespace API
     {
         public Startup(IConfiguration configuration)
         {
-            // test 
             Configuration = configuration;
         }
 
