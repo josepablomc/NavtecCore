@@ -1,27 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using FE.Models;
+using FE.Services;
 
 namespace FE.Controllers
 {
     public class ServiciosController : Controller
     {
-        private readonly NavtecCoreContext _context;
+        private readonly IServiciosServices serviciosServices;
 
-        public ServiciosController(NavtecCoreContext context)
+        public ServiciosController(IServiciosServices serviciosServices)
         {
-            _context = context;
+            this.serviciosServices = serviciosServices;
         }
+
+
 
         // GET: Servicios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Servicios.ToListAsync());
+            return View(serviciosServices.GetAll());
         }
 
         // GET: Servicios/Details/5
@@ -32,8 +31,7 @@ namespace FE.Controllers
                 return NotFound();
             }
 
-            var servicios = await _context.Servicios
-                .FirstOrDefaultAsync(m => m.IdServicio == id);
+            var servicios = serviciosServices.GetOneById((int)id);
             if (servicios == null)
             {
                 return NotFound();
@@ -57,8 +55,7 @@ namespace FE.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(servicios);
-                await _context.SaveChangesAsync();
+                serviciosServices.Insert(servicios);
                 return RedirectToAction(nameof(Index));
             }
             return View(servicios);
@@ -72,7 +69,7 @@ namespace FE.Controllers
                 return NotFound();
             }
 
-            var servicios = await _context.Servicios.FindAsync(id);
+            var servicios =  serviciosServices.GetOneById((int)id);
             if (servicios == null)
             {
                 return NotFound();
@@ -96,10 +93,9 @@ namespace FE.Controllers
             {
                 try
                 {
-                    _context.Update(servicios);
-                    await _context.SaveChangesAsync();
+                    serviciosServices.Update(servicios);
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception ee)
                 {
                     if (!ServiciosExists(servicios.IdServicio))
                     {
@@ -123,8 +119,7 @@ namespace FE.Controllers
                 return NotFound();
             }
 
-            var servicios = await _context.Servicios
-                .FirstOrDefaultAsync(m => m.IdServicio == id);
+            var servicios = serviciosServices.GetOneById((int)id);
             if (servicios == null)
             {
                 return NotFound();
@@ -138,15 +133,14 @@ namespace FE.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var servicios = await _context.Servicios.FindAsync(id);
-            _context.Servicios.Remove(servicios);
-            await _context.SaveChangesAsync();
+            var servicios = serviciosServices.GetOneById(id);
+            serviciosServices.Delete(servicios);
             return RedirectToAction(nameof(Index));
         }
 
         private bool ServiciosExists(int id)
         {
-            return _context.Servicios.Any(e => e.IdServicio == id);
+            return (serviciosServices.GetOneById(id) != null);
         }
     }
 }

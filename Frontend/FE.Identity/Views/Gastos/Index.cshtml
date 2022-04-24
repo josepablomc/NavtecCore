@@ -1,0 +1,50 @@
+﻿@model IEnumerable<FE.Identity.Models.Gastos>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.DescripcionGasto)*@
+                <label class="control-label">Descripcion</label>
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.FechaGasto)*@
+                <label class="control-label">Fecha</label>
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.MontoGasto)*@
+                <label class="control-label">Monto</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescripcionGasto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaGasto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MontoGasto)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdGasto">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdGasto">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdGasto">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

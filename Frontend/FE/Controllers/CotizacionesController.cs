@@ -1,29 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using FE.Models;
+using FE.Services;
 
 namespace FE.Controllers
     //Falta agregar el connection al server del backend
 {
     public class CotizacionesController : Controller
     {
-        private readonly NavtecCoreContext _context;
-
-        public CotizacionesController(NavtecCoreContext context)
-        {
-            _context = context;
-        }
+        private readonly IServiciosServices serviciosServices;
+        private readonly ICotizacionesServices cotizacionesServices;
 
         // GET: Cotizaciones
         public async Task<IActionResult> Index()
         {
-            var navtecCoreContext = _context.Cotizaciones.Include(c => c.IdServicioNavigation);
-            return View(await navtecCoreContext.ToListAsync());
+            return View(await cotizacionesServices.GetAllAsync());
         }
 
         // GET: Cotizaciones/Details/5
@@ -34,9 +27,7 @@ namespace FE.Controllers
                 return NotFound();
             }
 
-            var cotizaciones = await _context.Cotizaciones
-                .Include(c => c.IdServicioNavigation)
-                .FirstOrDefaultAsync(m => m.IdCotizacion == id);
+            var cotizaciones = await cotizacionesServices.GetOneByIdAsync((int)id);
             if (cotizaciones == null)
             {
                 return NotFound();
@@ -48,7 +39,7 @@ namespace FE.Controllers
         // GET: Cotizaciones/Create
         public IActionResult Create()
         {
-            ViewData["IdServicio"] = new SelectList(_context.Servicios, "IdServicio", "DescripcionServicio");
+            ViewData["IdServicio"] = new SelectList(serviciosServices.GetAll(), "IdServicio", "DescripcionServicio");
             return View();
         }
 
@@ -61,11 +52,10 @@ namespace FE.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(cotizaciones);
-                await _context.SaveChangesAsync();
+                cotizacionesServices.Insert(cotizaciones);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdServicio"] = new SelectList(_context.Servicios, "IdServicio", "DescripcionServicio", cotizaciones.IdServicio);
+            ViewData["IdServicio"] = new SelectList(serviciosServices.GetAll(), "IdServicio", "DescripcionServicio", cotizaciones.IdServicio);
             return View(cotizaciones);
         }
 
@@ -77,12 +67,12 @@ namespace FE.Controllers
                 return NotFound();
             }
 
-            var cotizaciones = await _context.Cotizaciones.FindAsync(id);
+            var cotizaciones = cotizacionesServices.GetOneById((int)id);
             if (cotizaciones == null)
             {
                 return NotFound();
             }
-            ViewData["IdServicio"] = new SelectList(_context.Servicios, "IdServicio", "DescripcionServicio", cotizaciones.IdServicio);
+            ViewData["IdServicio"] = new SelectList(serviciosServices.GetAll(), "IdServicio", "DescripcionServicio", cotizaciones.IdServicio);
             return View(cotizaciones);
         }
 
@@ -102,10 +92,9 @@ namespace FE.Controllers
             {
                 try
                 {
-                    _context.Update(cotizaciones);
-                    await _context.SaveChangesAsync();
+                    cotizacionesServices.Update(cotizaciones);
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception ee)
                 {
                     if (!CotizacionesExists(cotizaciones.IdCotizacion))
                     {
@@ -118,7 +107,7 @@ namespace FE.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdServicio"] = new SelectList(_context.Servicios, "IdServicio", "DescripcionServicio", cotizaciones.IdServicio);
+            ViewData["IdServicio"] = new SelectList(serviciosServices.GetAll(), "IdServicio", "DescripcionServicio", cotizaciones.IdServicio);
             return View(cotizaciones);
         }
 
@@ -130,9 +119,7 @@ namespace FE.Controllers
                 return NotFound();
             }
 
-            var cotizaciones = await _context.Cotizaciones
-                .Include(c => c.IdServicioNavigation)
-                .FirstOrDefaultAsync(m => m.IdCotizacion == id);
+            var cotizaciones = cotizacionesServices.GetOneByIdAsync((int)id);
             if (cotizaciones == null)
             {
                 return NotFound();
@@ -146,15 +133,14 @@ namespace FE.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cotizaciones = await _context.Cotizaciones.FindAsync(id);
-            _context.Cotizaciones.Remove(cotizaciones);
-            await _context.SaveChangesAsync();
+            var cotizaciones =  cotizacionesServices.GetOneById((int)id);
+            cotizacionesServices.Update(cotizaciones);
             return RedirectToAction(nameof(Index));
         }
 
         private bool CotizacionesExists(int id)
         {
-            return _context.Cotizaciones.Any(e => e.IdCotizacion == id);
+            return ((cotizacionesServices.GetOneById((int)id) != null));
         }
     }
 }

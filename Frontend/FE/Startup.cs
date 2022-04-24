@@ -1,3 +1,4 @@
+using FE.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,15 @@ namespace FE
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddScoped<IClientesServices, ClientesServices>();
+            services.AddScoped<ICotizacionesServices, CotizacionesServices>();
+            services.AddScoped<IEmpresasServices, EmpresasServices>();
+            services.AddScoped<IGastosServices, GastosServices>();
+            services.AddScoped<IProveedoresServices, ProveedoresServices>();
+            services.AddScoped<IRolesServices, RolesServices>();
+            services.AddScoped<IServiciosServices, ServiciosServices>();
+            services.AddScoped<IUsuariosServices, UsuariosServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
