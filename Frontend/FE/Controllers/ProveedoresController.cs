@@ -1,27 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using FE.Models;
+using FE.Services;
+using System;
 
 namespace FE.Controllers
 {
     public class ProveedoresController : Controller
     {
-        private readonly NavtecCoreContext _context;
+        private readonly IProveedoresServices proveedoresServices;
 
-        public ProveedoresController(NavtecCoreContext context)
+        public ProveedoresController(IProveedoresServices proveedorServices)
         {
-            _context = context;
+            this.proveedoresServices = proveedorServices;
         }
+
 
         // GET: Proveedores
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Proveedores.ToListAsync());
+            return View(proveedoresServices.GetAll());
         }
 
         // GET: Proveedores/Details/5
@@ -32,8 +32,7 @@ namespace FE.Controllers
                 return NotFound();
             }
 
-            var proveedores = await _context.Proveedores
-                .FirstOrDefaultAsync(m => m.IdProveedor == id);
+            var proveedores = proveedoresServices.GetOneById((int)id);
             if (proveedores == null)
             {
                 return NotFound();
@@ -57,8 +56,7 @@ namespace FE.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(proveedores);
-                await _context.SaveChangesAsync();
+                proveedoresServices.Insert(proveedores);
                 return RedirectToAction(nameof(Index));
             }
             return View(proveedores);
@@ -72,7 +70,7 @@ namespace FE.Controllers
                 return NotFound();
             }
 
-            var proveedores = await _context.Proveedores.FindAsync(id);
+            var proveedores = proveedoresServices.GetOneById((int)id);
             if (proveedores == null)
             {
                 return NotFound();
@@ -96,10 +94,9 @@ namespace FE.Controllers
             {
                 try
                 {
-                    _context.Update(proveedores);
-                    await _context.SaveChangesAsync();
+                    proveedoresServices.Update(proveedores);
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception ee)
                 {
                     if (!ProveedoresExists(proveedores.IdProveedor))
                     {
@@ -123,8 +120,7 @@ namespace FE.Controllers
                 return NotFound();
             }
 
-            var proveedores = await _context.Proveedores
-                .FirstOrDefaultAsync(m => m.IdProveedor == id);
+            var proveedores = proveedoresServices.GetOneById((int)id);
             if (proveedores == null)
             {
                 return NotFound();
@@ -138,15 +134,14 @@ namespace FE.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var proveedores = await _context.Proveedores.FindAsync(id);
-            _context.Proveedores.Remove(proveedores);
-            await _context.SaveChangesAsync();
+            var proveedores = proveedoresServices.GetOneById(id);
+            proveedoresServices.Delete(proveedores);
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProveedoresExists(int id)
         {
-            return _context.Proveedores.Any(e => e.IdProveedor == id);
+            return (proveedoresServices.GetOneById(id) != null);
         }
     }
 }
