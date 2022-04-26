@@ -31,7 +31,7 @@ namespace DAL.EF
             if (!optionsBuilder.IsConfigured)
             {
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-OK2CS3P\\SQLEXPRESS;Database=NavtecCore;Trusted_Connection=True;"); //OJO Cambiar por el nombre de la base de datos
+                optionsBuilder.UseSqlServer("Server=JP-PERSONAL\\SQLEXPRESS;Database=NavtecCore;Trusted_Connection=True;"); //OJO Cambiar por el nombre de la base de datos
             }
         }
 
