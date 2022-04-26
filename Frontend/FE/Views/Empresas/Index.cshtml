@@ -1,0 +1,53 @@
+﻿@model IEnumerable<FE.Models.Empresas>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreEmpresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TelefonoEmpresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CedulaJuridica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdClienteNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreEmpresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TelefonoEmpresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CedulaJuridica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdClienteNavigation.CorreoCliente)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdEmpresa">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdEmpresa">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdEmpresa">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

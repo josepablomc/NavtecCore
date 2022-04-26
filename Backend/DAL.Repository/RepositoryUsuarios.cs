@@ -19,7 +19,8 @@ namespace DAL.Repository
         }
         public async Task<IEnumerable<data.Usuarios>> GetAllAsync()
         {
-            return await _db.Usuarios.Include(n => n.Roles).Include(m => m.IdRol).ToListAsync();//Relationship between db tables (No se puede Insertar un Usuario en la DB sin Incluir el idRole)
+            //return await _db.Usuarios.Include(n => n.Roles).Include(m => m.IdRol).ToListAsync();//Relationship between db tables (No se puede Insertar un Usuario en la DB sin Incluir el idRole)
+            return await _db.Usuarios.Include(n => n.Roles).ToListAsync();
         }
 
         public async Task<data.Usuarios> GetOneByIdAsync(int Id)

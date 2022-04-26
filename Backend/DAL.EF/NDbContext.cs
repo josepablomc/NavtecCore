@@ -31,7 +31,7 @@ namespace DAL.EF
             if (!optionsBuilder.IsConfigured)
             {
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=localhost;Database=NavtecCore;Trusted_Connection=True;"); //OJO Cambiar por el nombre de la base de datos
+                optionsBuilder.UseSqlServer("Server=DESKTOP-OK2CS3P\\SQLEXPRESS;Database=NavtecCore;Trusted_Connection=True;"); //OJO Cambiar por el nombre de la base de datos
             }
         }
 
@@ -82,7 +82,7 @@ namespace DAL.EF
                     .HasColumnName("precioCotizacion")
                     .HasColumnType("decimal(18, 0)");
 
-                entity.HasOne(d => d.IdServicioNavigation)
+                entity.HasOne(d => d.Servicios)
                     .WithMany(p => p.Cotizaciones)
                     .HasForeignKey(d => d.IdServicio)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -116,7 +116,7 @@ namespace DAL.EF
                 entity.HasOne(d => d.Clientes) //Tabla del Foreign Key (Ojo este alias se lee de DAL.DO.Objects la cual fue copiada de API.W Models)
                     .WithMany(p => p.Empresas)
                     .HasForeignKey(d => d.IdCliente)
-                    .OnDelete(DeleteBehavior.ClientSetNull) //No estoy segura de borrar esto, me parece el constraint --Karen 19/03/2022
+                    //.OnDelete(DeleteBehavior.ClientSetNull) //No estoy segura de borrar esto, me parece el constraint --Karen 19/03/2022
                     .HasConstraintName("FK_Empresa_Cliente");
             });
 

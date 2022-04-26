@@ -4,24 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using FE.Models;
+using FE.Services;
 
 namespace FE.Controllers
 {
     public class GastosController : Controller
     {
-        private readonly NavtecCoreContext _context;
+        private readonly IGastosServices gastosServices;
 
-        public GastosController(NavtecCoreContext context)
+        public GastosController(IGastosServices gastosServices)
         {
-            _context = context;
+            this.gastosServices = gastosServices;
         }
+
 
         // GET: Gastos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Gastos.ToListAsync());
+            return View(gastosServices.GetAll());
         }
 
         // GET: Gastos/Details/5
@@ -32,8 +33,7 @@ namespace FE.Controllers
                 return NotFound();
             }
 
-            var gastos = await _context.Gastos
-                .FirstOrDefaultAsync(m => m.IdGasto == id);
+            var gastos = gastosServices.GetOneById((int)id);
             if (gastos == null)
             {
                 return NotFound();
@@ -57,8 +57,7 @@ namespace FE.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(gastos);
-                await _context.SaveChangesAsync();
+                gastosServices.Insert(gastos);
                 return RedirectToAction(nameof(Index));
             }
             return View(gastos);
@@ -72,7 +71,7 @@ namespace FE.Controllers
                 return NotFound();
             }
 
-            var gastos = await _context.Gastos.FindAsync(id);
+            var gastos = gastosServices.GetOneById((int)id);
             if (gastos == null)
             {
                 return NotFound();
@@ -96,10 +95,9 @@ namespace FE.Controllers
             {
                 try
                 {
-                    _context.Update(gastos);
-                    await _context.SaveChangesAsync();
+                    gastosServices.Update(gastos);
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception ee)
                 {
                     if (!GastosExists(gastos.IdGasto))
                     {
@@ -123,8 +121,7 @@ namespace FE.Controllers
                 return NotFound();
             }
 
-            var gastos = await _context.Gastos
-                .FirstOrDefaultAsync(m => m.IdGasto == id);
+            var gastos = gastosServices.GetOneById((int)id);
             if (gastos == null)
             {
                 return NotFound();
@@ -138,15 +135,13 @@ namespace FE.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var gastos = await _context.Gastos.FindAsync(id);
-            _context.Gastos.Remove(gastos);
-            await _context.SaveChangesAsync();
+            var gastos = gastosServices.GetOneById(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool GastosExists(int id)
         {
-            return _context.Gastos.Any(e => e.IdGasto == id);
+            return (gastosServices.GetOneById(id) != null);
         }
     }
 }

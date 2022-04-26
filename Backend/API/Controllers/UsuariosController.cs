@@ -30,7 +30,7 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<models.Usuarios>>> GetUsuarios()
         {
 
-            var res = new BE.Usuarios(_context).GetAll();
+            var res = new BE.Usuarios(_context).GetAllAsync().Result;
             List<models.Usuarios> mapaAux = _mapper.Map<IEnumerable<data.Usuarios>, IEnumerable<models.Usuarios>>(res).ToList();
             return mapaAux;
         }

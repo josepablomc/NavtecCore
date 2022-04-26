@@ -10,10 +10,10 @@ namespace API.DataModels
 {
     public partial class Clientes
     {
-        //public Clientes()
-        //{
-        //    Empresas = new HashSet<Empresas>();
-        //}
+       public Clientes()
+        {
+           //Empresas = new HashSet<Empresas>();
+        }
 
         public int IdCliente { get; set; }
         public string NombreCliente { get; set; }

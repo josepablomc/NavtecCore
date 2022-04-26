@@ -19,12 +19,12 @@ namespace DAL.Repository
         }
         public async Task<IEnumerable<data.Cotizaciones>> GetAllAsync()
         {
-            return await _db.Cotizaciones.Include(n => n.IdServicio).Include(m => m.IdServicio).ToListAsync();//Relationship between db tables (No se puede Insertar una Cotizacion en la DB sin Incluir el idRServicio)
+            return await _db.Cotizaciones.Include(n => n.Servicios).ToListAsync();//Relationship between db tables (No se puede Insertar una Cotizacion en la DB sin Incluir el idRServicio)
         }
 
         public async Task<data.Cotizaciones> GetOneByIdAsync(int Id)
         {
-            return await _db.Cotizaciones.Include(n => n.IdServicio).Include(m => m.IdServicio).SingleOrDefaultAsync(n => n.IdServicio == Id);
+            return await _db.Cotizaciones.Include(n => n.Servicios).Include(m => m.IdServicio).SingleOrDefaultAsync(n => n.IdServicio == Id);
         }
         private NDbContext _db
         {

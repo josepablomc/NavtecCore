@@ -19,7 +19,7 @@ namespace DAL.Repository
         }
         public async Task<IEnumerable<data.Empresas>> GetAllAsync()
         {
-            return await _db.Empresas.Include(n => n.Clientes).Include(m => m.IdCliente).ToListAsync();//Relationship between db tables
+            return await _db.Empresas.Include(n => n.Clientes).ToListAsync();//Relationship between db tables
         }
 
         public async Task<data.Empresas> GetOneByIdAsync(int Id)
