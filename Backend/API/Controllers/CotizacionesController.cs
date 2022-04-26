@@ -109,7 +109,7 @@ namespace API.Controllers
             }
 
 
-            return CreatedAtAction("GetCustomers", new { id = Cotizaciones.IdCotizacion}, Cotizaciones); //Ojo validar el nombre del row que contiene el ID de la tabla en la DB
+            return CreatedAtAction("GetCotizaciones", new { id = Cotizaciones.IdCotizacion}, Cotizaciones); //Ojo validar el nombre del row que contiene el ID de la tabla en la DB
         }
 
         // DELETE: api/Cotizaciones/5

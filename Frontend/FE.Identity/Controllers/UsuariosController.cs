@@ -128,7 +128,7 @@ namespace FE.Identity.Controllers
                 return NotFound();
             }
 
-            var usuarios = usuariosServices.GetOneByIdAsync((int)id);
+            var usuarios = await usuariosServices.GetOneByIdAsync((int)id);
             if (usuarios == null)
             {
                 return NotFound();
@@ -143,7 +143,7 @@ namespace FE.Identity.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var usuarios = usuariosServices.GetOneById((int)id);
-            usuariosServices.Update(usuarios);
+            usuariosServices.Delete(usuarios);
             return RedirectToAction(nameof(Index));
         }
 

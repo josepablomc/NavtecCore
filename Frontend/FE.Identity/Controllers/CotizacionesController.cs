@@ -127,7 +127,7 @@ namespace FE.Identity.Controllers
                 return NotFound();
             }
 
-            var cotizaciones = cotizacionesServices.GetOneByIdAsync((int)id);
+            var cotizaciones = await cotizacionesServices.GetOneByIdAsync((int)id);
             if (cotizaciones == null)
             {
                 return NotFound();
@@ -142,7 +142,7 @@ namespace FE.Identity.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var cotizaciones =  cotizacionesServices.GetOneById((int)id);
-            cotizacionesServices.Update(cotizaciones);
+            cotizacionesServices.Delete(cotizaciones);
             return RedirectToAction(nameof(Index));
         }
 

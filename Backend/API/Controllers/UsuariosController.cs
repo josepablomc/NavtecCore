@@ -108,7 +108,7 @@ namespace API.Controllers
             }
 
 
-            return CreatedAtAction("GetCustomers", new { id = Usuarios.IdUsuario }, Usuarios); //Ojo validar el nombre del row que contiene el ID de la tabla en la DB
+            return CreatedAtAction("GetUsuarios", new { id = Usuarios.IdUsuario }, Usuarios); //Ojo validar el nombre del row que contiene el ID de la tabla en la DB
         }
 
         // DELETE: api/Usuarios/5
