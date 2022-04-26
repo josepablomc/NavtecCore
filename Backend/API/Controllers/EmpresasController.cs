@@ -105,7 +105,7 @@ namespace API.Controllers
         public async Task<ActionResult<models.Empresas>> DeleteEmpresas(int id)
         {
             var Empresas = new BE.Empresas(_context).GetOneById(id);
-            var mapaux = Mapper.Map<data.Empresas, models.Empresas>(Empresas);
+            //var mapaux = Mapper.Map<data.Empresas, models.Empresas>(Empresas);
             if (Empresas == null)
             {
                 return NotFound();
@@ -120,8 +120,8 @@ namespace API.Controllers
 
                 BadRequest();
             }
-
-            return mapaux;
+            models.Empresas mapaAux = _mapper.Map<data.Empresas, models.Empresas>(Empresas);
+            return mapaAux;
         }
 
         private bool Exists(int id)
