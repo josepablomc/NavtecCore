@@ -10,7 +10,7 @@ namespace DAL.DO.Objects
     {
 
         public int IdEmpresa { get; set; }
-        [Key] //To define this is a Foreingnkey 
+        //To define this is a Foreingnkey 
         public int IdCliente { get; set; }
         public string NombreEmpresa { get; set; }
         public string TelefonoEmpresa { get; set; }

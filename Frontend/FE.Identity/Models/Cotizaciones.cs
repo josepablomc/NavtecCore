@@ -15,6 +15,6 @@ namespace FE.Identity.Models
         public string NombreCliente { get; set; }
         public decimal PrecioCotizacion { get; set; }
 
-        public virtual Servicios IdServicioNavigation { get; set; }
+        public virtual Servicios Servicios { get; set; }
     }
 }

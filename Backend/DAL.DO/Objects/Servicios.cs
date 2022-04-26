@@ -17,6 +17,6 @@ namespace DAL.DO.Objects
         public int IdServicio { get; set; }
         public string DescripcionServicio { get; set; }
 
-        public virtual ICollection<Cotizaciones> Cotizaciones { get; set; }
+       public virtual ICollection<Cotizaciones> Cotizaciones { get; set; }
     }
 }

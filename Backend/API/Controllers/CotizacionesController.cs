@@ -30,7 +30,7 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<models.Cotizaciones>>> GetCotizaciones()
         {
 
-            var res = new BE.Cotizaciones(_context).GetAll();
+            var res = new BE.Cotizaciones(_context).GetAllAsync().Result;
             List<models.Cotizaciones> mapaAux = _mapper.Map<IEnumerable<data.Cotizaciones>, IEnumerable<models.Cotizaciones>>(res).ToList();
             return mapaAux;
         }

@@ -13,10 +13,10 @@ namespace FE.Identity.Controllers
         private readonly IServiciosServices serviciosServices;
         private readonly ICotizacionesServices cotizacionesServices;
 
-        public CotizacionesController(IServiciosServices serviciosServices, ICotizacionesServices cotizacionesServices)
+        public CotizacionesController(IServiciosServices _serviciosServices, ICotizacionesServices _cotizacionesServices)
         {
-            this.serviciosServices = serviciosServices;
-            this.cotizacionesServices = cotizacionesServices;
+            this.serviciosServices = _serviciosServices;
+            this.cotizacionesServices = _cotizacionesServices;
         }
 
 

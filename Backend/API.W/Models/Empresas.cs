@@ -15,7 +15,6 @@ namespace API.W.Models
         public string TelefonoEmpresa { get; set; }
         public string CedulaJuridica { get; set; }
 
-        public virtual Clientes IdClienteNavigation { get; set; }
         public virtual Clientes Clientes { get; set; } //Ojo con el Alias
     }
 }

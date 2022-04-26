@@ -10,6 +10,9 @@ namespace FE.Identity.Services
 {
     public class RolesServices : IRolesServices
     {
+        public RolesServices()
+        {
+        }
         public void Delete(Roles t)
         {
             try

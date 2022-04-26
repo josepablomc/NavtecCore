@@ -44,7 +44,7 @@
                 @Html.DisplayFor(modelItem => item.CedulaJuridica)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdClienteNavigation.NombreCliente)
+                @Html.DisplayFor(modelItem => item.Clientes.NombreCliente)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdEmpresa">Edit</a> |

@@ -30,7 +30,7 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<models.Empresas>>> GetEmpresas()
         {
 
-            var res = new BE.Empresas(_context).GetAll();
+            var res = new BE.Empresas(_context).GetAllAsync().Result;
             List<models.Empresas> mapaAux = _mapper.Map<IEnumerable<data.Empresas>, IEnumerable<models.Empresas>>(res).ToList();
             return mapaAux;
         }
@@ -97,7 +97,7 @@ namespace API.Controllers
             }
 
 
-            return CreatedAtAction("GetCustomers", new { id = Empresas.IdEmpresa }, Empresas); //Ojo validar el nombre del row que contiene el ID de la tabla en la DB
+            return CreatedAtAction("GetEmpresas", new { id = Empresas.IdEmpresa }, Empresas); //Ojo validar el nombre del row que contiene el ID de la tabla en la DB
         }
 
         // DELETE: api/Empresas/5
@@ -105,6 +105,7 @@ namespace API.Controllers
         public async Task<ActionResult<models.Empresas>> DeleteEmpresas(int id)
         {
             var Empresas = new BE.Empresas(_context).GetOneById(id);
+            var mapaux = Mapper.Map<data.Empresas, models.Empresas>(Empresas);
             if (Empresas == null)
             {
                 return NotFound();
@@ -120,8 +121,7 @@ namespace API.Controllers
                 BadRequest();
             }
 
-            models.Empresas mapaAux = _mapper.Map<data.Empresas, models.Empresas>(Empresas);
-            return mapaAux;
+            return mapaux;
         }
 
         private bool Exists(int id)

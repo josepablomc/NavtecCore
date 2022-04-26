@@ -10,6 +10,9 @@ namespace FE.Identity.Services
 {
     public class CotizacionesServices : ICotizacionesServices
     {
+        public CotizacionesServices()
+        {
+        }
         public void Delete(Cotizaciones t)
         {
             try

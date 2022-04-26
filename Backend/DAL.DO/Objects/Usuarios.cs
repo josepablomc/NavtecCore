@@ -11,7 +11,7 @@ namespace DAL.DO.Objects
     public partial class Usuarios
     {
         public int IdUsuario { get; set; }
-        [Key] //To define this is a Foreingnkey 
+        //[Key] //To define this is a Foreingnkey 
         public int IdRol { get; set; }
         public string NombreCompleto { get; set; }
         public string CorreoUsuario { get; set; }

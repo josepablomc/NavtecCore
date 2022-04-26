@@ -12,10 +12,10 @@ namespace FE.Identity.Controllers
         private readonly IClientesServices clientesServices;
         private readonly IEmpresasServices empresasServices;
 
-        public EmpresasController(IClientesServices clientesServices, IEmpresasServices empresasServices)
+        public EmpresasController(IClientesServices _clientesServices, IEmpresasServices _empresasServices)
         {
-            this.clientesServices = clientesServices;
-            this.empresasServices = empresasServices;
+            this.clientesServices = _clientesServices;
+            this.empresasServices = _empresasServices;
         }
 
 

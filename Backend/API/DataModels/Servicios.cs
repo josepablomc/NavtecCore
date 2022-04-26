@@ -10,14 +10,14 @@ namespace API.DataModels
 {
     public partial class Servicios
     {
-        public Servicios()
-        {
-            Cotizaciones = new HashSet<Cotizaciones>();
-        }
+        //public Servicios()
+        //{
+        //    Cotizaciones = new HashSet<Cotizaciones>();
+        //}
 
         public int IdServicio { get; set; }
         public string DescripcionServicio { get; set; }
 
-        public virtual ICollection<Cotizaciones> Cotizaciones { get; set; }
+        //public virtual ICollection<Cotizaciones> Cotizaciones { get; set; }
     }
 }

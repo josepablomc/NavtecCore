@@ -136,6 +136,7 @@ namespace FE.Identity.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var gastos = gastosServices.GetOneById(id);
+            gastosServices.Delete(gastos);
             return RedirectToAction(nameof(Index));
         }
 
