@@ -40,13 +40,13 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<models.Usuarios>> GetUsuarios(int id)
         {
-            var Usuarios = new BE.Usuarios(_context).GetOneById(id);
+            var Usuarios = await new BE.Usuarios(_context).GetOneByIdAsync(id);
+            var mapaAux = _mapper.Map<data.Usuarios, models.Usuarios>(Usuarios);
 
             if (Usuarios == null)
             {
                 return NotFound();
             }
-            models.Usuarios mapaAux = _mapper.Map<data.Usuarios, models.Usuarios>(Usuarios);
             return mapaAux;
 
         }

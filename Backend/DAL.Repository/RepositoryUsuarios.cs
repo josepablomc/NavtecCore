@@ -25,7 +25,7 @@ namespace DAL.Repository
 
         public async Task<data.Usuarios> GetOneByIdAsync(int Id)
         {
-            return await _db.Usuarios.Include(n => n.Roles).Include(m => m.IdRol).SingleOrDefaultAsync(n => n.IdRol == Id);
+            return await _db.Usuarios.Include(n => n.Roles).SingleOrDefaultAsync(n => n.IdUsuario == Id);
         }
         private NDbContext _db
         {
