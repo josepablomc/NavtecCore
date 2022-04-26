@@ -40,13 +40,14 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<models.Cotizaciones>> GetCotizaciones(int id)
         {
-            var Cotizaciones = new BE.Cotizaciones(_context).GetOneById(id);
+            var Cotizaciones = await new BE.Cotizaciones(_context).GetOneByIdAsync(id);
+            var mapaAux = _mapper.Map<data.Cotizaciones, models.Cotizaciones>(Cotizaciones);
 
             if (Cotizaciones == null)
             {
                 return NotFound();
             }
-            models.Cotizaciones mapaAux = _mapper.Map<data.Cotizaciones, models.Cotizaciones>(Cotizaciones);
+
             return mapaAux;
 
         }

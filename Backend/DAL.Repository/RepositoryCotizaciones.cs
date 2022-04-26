@@ -24,7 +24,7 @@ namespace DAL.Repository
 
         public async Task<data.Cotizaciones> GetOneByIdAsync(int Id)
         {
-            return await _db.Cotizaciones.Include(n => n.Servicios).Include(m => m.IdServicio).SingleOrDefaultAsync(n => n.IdServicio == Id);
+            return await _db.Cotizaciones.Include(n => n.Servicios).SingleOrDefaultAsync(n => n.IdCotizacion == Id);
         }
         private NDbContext _db
         {
