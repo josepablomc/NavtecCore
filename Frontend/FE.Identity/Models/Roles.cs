@@ -11,7 +11,7 @@ namespace FE.Identity.Models
     {
         public Roles()
         {
-            Usuarios = new HashSet<Usuarios>();
+         Usuarios = new HashSet<Usuarios>();
         }
 
         public int IdRol { get; set; }

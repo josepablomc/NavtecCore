@@ -7,14 +7,27 @@ using System.Collections.Generic;
 
 namespace FE.Identity.Models
 {
+    //public partial class Usuarios
+    //{
+    //    public int IdUsuario { get; set; }
+    //    public int IdRol { get; set; }
+    //    public string NombreCompleto { get; set; }
+    //    public string CorreoUsuario { get; set; }
+    //    public string ClaveUsuario { get; set; }
+
+    //    public virtual Roles IdRolNavigation { get; set; }
+    //}
+
     public partial class Usuarios
     {
+
         public int IdUsuario { get; set; }
         public int IdRol { get; set; }
         public string NombreCompleto { get; set; }
         public string CorreoUsuario { get; set; }
         public string ClaveUsuario { get; set; }
 
-        public virtual Roles IdRolNavigation { get; set; }
+        public virtual Roles Roles { get; set; }
+
     }
 }

@@ -10,6 +10,10 @@ namespace FE.Identity.Services
 {
     public class EmpresasServices : IEmpresasServices
     {
+        public EmpresasServices()
+        {
+        }
+
         public void Delete(Empresas t)
         {
             try

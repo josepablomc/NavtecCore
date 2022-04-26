@@ -12,9 +12,9 @@ namespace FE.Identity.Controllers
     {
         private readonly IRolesServices rolesServices;
 
-        public RolesController(IRolesServices rolesServices)
+        public RolesController(IRolesServices _rolesServices)
         {
-            this.rolesServices = rolesServices;
+            this.rolesServices = _rolesServices;
         }
 
 

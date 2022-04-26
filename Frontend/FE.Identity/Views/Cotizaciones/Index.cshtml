@@ -44,7 +44,7 @@
                 @Html.DisplayFor(modelItem => item.PrecioCotizacion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdServicioNavigation.DescripcionServicio)
+                @Html.DisplayFor(modelItem => item.Servicios.DescripcionServicio)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdCotizacion">Edit</a> |

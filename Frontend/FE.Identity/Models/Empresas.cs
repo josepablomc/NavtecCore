@@ -7,6 +7,16 @@ using System.Collections.Generic;
 
 namespace FE.Identity.Models
 {
+    //public partial class Empresas
+    //{
+    //    public int IdEmpresa { get; set; }
+    //    public int IdCliente { get; set; }
+    //    public string NombreEmpresa { get; set; }
+    //    public string TelefonoEmpresa { get; set; }
+    //    public string CedulaJuridica { get; set; }
+
+    //    public virtual Clientes IdClienteNavigation { get; set; }
+    //}
     public partial class Empresas
     {
         public int IdEmpresa { get; set; }
@@ -15,6 +25,6 @@ namespace FE.Identity.Models
         public string TelefonoEmpresa { get; set; }
         public string CedulaJuridica { get; set; }
 
-        public virtual Clientes IdClienteNavigation { get; set; }
+        public virtual Clientes Clientes { get; set; }
     }
 }

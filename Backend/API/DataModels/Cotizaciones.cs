@@ -10,13 +10,12 @@ namespace API.DataModels
 {
     public partial class Cotizaciones
     {
-        [Key]
         public int IdCotizacion { get; set; }
         public int IdServicio { get; set; }
         public DateTime FechaCotizacion { get; set; }
         public string NombreCliente { get; set; }
         public decimal PrecioCotizacion { get; set; }
 
-        public virtual Servicios IdServicioNavigation { get; set; }
+        public virtual Servicios Servicios { get; set; }
     }
 }

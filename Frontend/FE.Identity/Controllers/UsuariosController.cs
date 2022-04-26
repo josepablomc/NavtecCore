@@ -14,10 +14,10 @@ namespace FE.Identity.Controllers
         private readonly IRolesServices rolesServices;
         private readonly IUsuariosServices usuariosServices;
 
-        public UsuariosController(IRolesServices rolesServices, IUsuariosServices usuariosServices)
+        public UsuariosController(IRolesServices _rolesServices, IUsuariosServices _usuariosServices)
         {
-            this.rolesServices = rolesServices;
-            this.usuariosServices = usuariosServices;
+            this.rolesServices = _rolesServices;
+            this.usuariosServices = _usuariosServices;
         }
 
 

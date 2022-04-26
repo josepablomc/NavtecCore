@@ -16,7 +16,7 @@ namespace API.DataModels
         public string CorreoUsuario { get; set; }
         public string ClaveUsuario { get; set; }
 
-        public virtual Roles Rol { get; set; }
+        public virtual Roles Roles { get; set; }
 
     }
 }
