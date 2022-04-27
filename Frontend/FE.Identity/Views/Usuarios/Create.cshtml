@@ -6,28 +6,28 @@
 
 <h1>Create</h1>
 
-<h4>Usuarios</h4>
+<h4>Empleados</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="IdRol" class="control-label"></label>
+                <label class="control-label">ID Rol</label>
                 <select asp-for="IdRol" class ="form-control" asp-items="ViewBag.IdRol"></select>
             </div>
             <div class="form-group">
-                <label asp-for="NombreCompleto" class="control-label"></label>
+                <label class="control-label">Nombre Completo</label>
                 <input asp-for="NombreCompleto" class="form-control" />
                 <span asp-validation-for="NombreCompleto" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CorreoUsuario" class="control-label"></label>
+                <label class="control-label">Correo</label>
                 <input asp-for="CorreoUsuario" class="form-control" />
                 <span asp-validation-for="CorreoUsuario" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClaveUsuario" class="control-label"></label>
+                <label class="control-label">Clave Usuario</label>
                 <input asp-for="ClaveUsuario" class="form-control" />
                 <span asp-validation-for="ClaveUsuario" class="text-danger"></span>
             </div>
